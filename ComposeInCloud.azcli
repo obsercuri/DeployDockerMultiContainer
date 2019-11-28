@@ -1,0 +1,26 @@
+
+az account set --subscription "Microsoft Partner Network"
+mkdir quickstart
+
+cd $HOME/quickstart
+
+#Create the docker compose file and add the text or clone it from the git
+vi hftmmulticontainer.yml
+
+#Create a Resource Group to structure your resource deployments
+az group create --name d-reg-hftmmulticontainer --location "West Europe"
+
+#Create an app Service plan to deploy your containers in
+#takes up to 3min
+az appservice plan create --name t-asp-hftmmulti --resource-group d-reg-hftmmulticontainer --sku S1 --is-linux
+
+#Deploys an webapplicaiton app with multi container
+#Will take up to 10min 
+az webapp create --resource-group d-reg-hftmmulticontainer --plan t-asp-hftmmulti --name d-app-hftmmulticontainer --multicontainer-config-type compose --multicontainer-config-file docker-compose.yml
+
+#Configure local Storage
+az webapp config appsettings set --resource-group d-reg-hftmmulticontainer --name d-app-hftmmulticontainer --settings WEBSITES_ENABLE_APP_SERVICE_STORAGE=TRUE
+
+#If necessary configure logging
+az webapp log config --name d-app-hftmmulticontainer --resource-group d-reg-hftmmulticontainer --docker-container-logging filesystem
+az webapp log tail --name d-app-hftmmulticontainer --resource-group d-reg-hftmmulticontainer
