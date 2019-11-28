@@ -1,17 +1,20 @@
 #!/bin/bash
 
+#Definition of variables
 subscription = "Microsoft Partner Network"
-
+resourceGrp = "d-reg-multicontainerapp"
+appServicePlan = "d-asp-multicontainer"
+AppServiceName = "d-app-multicontainer"
 
 az account set --subscription subscription
 
-cd $HOME/quickstart
-
 #Create the docker compose file and add the text or clone it from the git
-vi hftmmulticontainer.yml
+git clone https://github.com/obsercuri/DeployDockerMultiContainer.git
+
+cd $HOME/DeployDockerMultiContainer
 
 #Create a Resource Group to structure your resource deployments
-az group create --name d-reg-hftmmulticontainer --location "West Europe"
+az group create --name resourceGrp --location "West Europe"
 
 #Create an app Service plan to deploy your containers in
 #takes up to 3min
