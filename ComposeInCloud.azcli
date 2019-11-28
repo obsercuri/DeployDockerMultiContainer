@@ -18,15 +18,15 @@ az group create --name resourceGrp --location "West Europe"
 
 #Create an app Service plan to deploy your containers in
 #takes up to 3min
-az appservice plan create --name t-asp-hftmmulti --resource-group d-reg-hftmmulticontainer --sku S1 --is-linux
+az appservice plan create --name appServicePlan --resource-group resourceGrp --sku S1 --is-linux
 
 #Deploys an webapplicaiton app with multi container
 #Will take up to 10min 
-az webapp create --resource-group d-reg-hftmmulticontainer --plan t-asp-hftmmulti --name d-app-hftmmulticontainer --multicontainer-config-type compose --multicontainer-config-file docker-compose.yml
+az webapp create --resource-group resourceGrp --plan appServicePlan --name AppServiceName --multicontainer-config-type compose --multicontainer-config-file docker-compose.yml
 
 #Configure local Storage
-az webapp config appsettings set --resource-group d-reg-hftmmulticontainer --name d-app-hftmmulticontainer --settings WEBSITES_ENABLE_APP_SERVICE_STORAGE=TRUE
+az webapp config appsettings set --resource-group resourceGrp --name AppServiceName --settings WEBSITES_ENABLE_APP_SERVICE_STORAGE=TRUE
 
 #If necessary configure logging
-az webapp log config --name d-app-hftmmulticontainer --resource-group d-reg-hftmmulticontainer --docker-container-logging filesystem
-az webapp log tail --name d-app-hftmmulticontainer --resource-group d-reg-hftmmulticontainer
+#az webapp log config --name d-app-hftmmulticontainer --resource-group d-reg-hftmmulticontainer --docker-container-logging filesystem
+#az webapp log tail --name d-app-hftmmulticontainer --resource-group d-reg-hftmmulticontainer
