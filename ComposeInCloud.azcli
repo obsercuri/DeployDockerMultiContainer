@@ -1,11 +1,3 @@
-#!/bin/bash
-
-#Definition of variables
-subscription = "Microsoft Partner Network"
-resourceGrp = "d-reg-multicontainerapp"
-appServicePlan = "d-asp-multicontainer"
-AppServiceName = "d-app-multicontainer"
-
 az account set --subscription subscription
 
 #Create the docker compose file and add the text or clone it from the git
