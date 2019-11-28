@@ -1,6 +1,9 @@
+#!/bin/bash
 
-az account set --subscription "Microsoft Partner Network"
-mkdir quickstart
+subscription = "Microsoft Partner Network"
+
+
+az account set --subscription subscription
 
 cd $HOME/quickstart
 
