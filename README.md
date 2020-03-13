@@ -1,5 +1,5 @@
 # DeployMultiContainerapp
-This is a repo to publish your multi container app into Azuer app service
+This is a repo to publish your multi container app into Azure app service
 
 ## Use Azure CLI
 To deploy this app with Azure CLI you must use the script ComposeInCloud.sh
